@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 class Node {
 public:
     int data;
@@ -8,6 +11,7 @@ public:
         next = NULL;
     }
 };
+
 class Queue {
 private:
     Node* front;
@@ -38,12 +42,16 @@ public:
             return;
         }
 
-        cout << "Deleted: " << front->data << endl;
+        Node* temp = front;
+        cout << "Deleted: " << temp->data << endl;
+
         front = front->next;
 
         if (front == NULL) {
             rear = NULL;
         }
+
+        delete temp; // ✅ free memory
     }
 
     // DISPLAY
@@ -56,14 +64,18 @@ public:
         cout << "NULL\n";
     }
 };
+
 int main() {
-  // Queue
     Queue q;
+
     q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);
+
     q.display();
+
     q.dequeue();
+
     q.display();
 
     return 0;
